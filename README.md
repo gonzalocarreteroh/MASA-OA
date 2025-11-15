@@ -12,23 +12,19 @@ This is the official repository for the _Multiple Object Tracker with Integrated
 * For our evaluation, we used the MASA-R50: MASA with ResNet-50 backbone to extract object embeddings. However, in practice, other variants could also be used to perform the tracking together with our MASA-OA tracker implementation.
 
 ## Structure
-- `demo/video_demo_with_text.py`: This is the main script in which you can specify the detection inputs, run the MASA-OA tracking, and generate the output video with tracked objects as well as the text files for performance evaluation with TrackEval.
+- `demo/video_demo_with_text.py`: This is the main script in which the detection inputs are specified, runs the MASA-OA tracking, and generates the output video with tracked objects as well as the text files for performance evaluation with TrackEval.
 - `masa/models/tracker/masa_tao_tracker.py`: This file contains the implementation of the MASA-OA tracker with the integrated assignment optimization and occlusion-aware capabilities.
 - `masa/models/tracker/MASA_OA_KF/kalman_filter.py`: This file contains the Kalman Filter implementation used for motion estimation in the MASA-OA tracker.
 - `masa/models/tracker/MASA_OA_KF/track.py`: This file contains the tracking logic that integrates the Kalman Filter into the tracker.
 - `benchmarks`: You can place the input videos and detection text files here from which the model will generate the tracking outputs for evaluation. An example is provided with the MOT15 dataset.
 - `benchmarks/imgs_to_video.py`: This script converts image sequences provided by MOTChallenge to video format for easier visualization and evaluation.
+- `run_benchmark.py`: This script automates the process of running the MASA-OA tracker on all sequences in a specified benchmark, generating tracking results and visualization videos as needed.
 
 
 ## Installation
 
-### Prerequisites
-- Python 3.8+
-- PyTorch 1.10+
-- CUDA compatible GPU
-
 ### Environment Setup
-1. Clone the repository and install dependencies following the original MASA installation instructions
+1. Clone the repository and install dependencies following the original MASA installation instructions (install_dependencies.sh)
 
 2. Download the [MASA-R50](https://huggingface.co/dereksiyuanli/masa/resolve/main/masa_r50.pth) weights and place it in `saved_models/masa_models/` directory:
 ```bash
@@ -38,7 +34,7 @@ mkdir -p saved_models/masa_models/
 
 ## Benchmark Evaluation with Ground Truth Detections
 
-This implementation is designed to evaluate the MASA-OA tracker on MOT benchmarks using **ground truth detections**. Currently, the repository includes setup for the MOT15 dataset.
+This implementation is designed to evaluate the MASA-OA tracker on MOT benchmarks using **ground truth detections**. Currently, the repository includes setup for the MOT15 dataset as an example. You can add other benchmarks by following the same structure.
 
 ### Benchmark Data Structure
 
@@ -70,29 +66,33 @@ The following sequences are currently included:
 
 ### Running Evaluation on a Single Sequence (Manual Method)
 
-**Important:** Currently, you need to manually modify `demo/video_demo_with_text.py` for each video sequence you want to evaluate.
+**Important:** You would need to manually modify `demo/video_demo_with_text.py` for each video sequence you want to evaluate.
 
 #### Step 1: Modify video_demo_with_text.py
 
-Open `demo/video_demo_with_text.py` and locate the following lines (around lines 208-211 and 289):
+Open `demo/video_demo_with_text.py` and locate the following lines:
 
-1. **Line 226** - Detection file path:
+1. Detection file path:
 ```python
+# Change with the path to the GT detections of the sequence you want to evaluate
 detections_dict = load_detections('./benchmarks/MOT15/Venice-2/gt/gt.txt')
 ```
 
-2. **Line 210** - Input video path:
+2. Input video path:
 ```python
+# Change with the path to the input video of the sequence you want to evaluate
 video_path = "./benchmarks/MOT15/Venice-2/Venice-2.mp4"
 ```
 
-3. **Line 211** - Output visualization path (optional, for GT bounding boxes visualization):
+3. Output visualization path (optional, for GT bounding boxes visualization):
 ```python
+# Change with the path to the output visualization video for GT bounding boxes
 output_path = "./evaluation/MOT15/Venice-2/Venice-2_GT_bboxes.mp4"
 ```
 
-4. **Line 289** - Output tracking results path:
+4. Output tracking results path:
 ```python
+# Change with the path to the output tracking results file
 output_mot_txt = './evaluation/MOT15/Venice-2/Venice-2_masa-hung-kf-OcclusionAware.txt'
 ```
 
@@ -110,7 +110,6 @@ python demo/video_demo_with_text.py \
     --show_fps
 ```
 
-**Note:** The `--video` and `--out` arguments are not used in the current implementation as the paths are hardcoded in the script.
 
 #### Step 3: Output Files
 
@@ -119,7 +118,6 @@ The script generates two main outputs:
 1. **Tracking results** (`.txt` file):
    - Location: `evaluation/MOT15/SEQUENCE_NAME/SEQUENCE_NAME_masa-hung-kf-OcclusionAware.txt`
    - Format: MOTChallenge format compatible with TrackEval
-   - Contains: frame, track_id, bbox coordinates, confidence score
 
 2. **Visualization video** (`.mp4` file):
    - Location: `evaluation/MOT15/SEQUENCE_NAME/SEQUENCE_NAME_GT_bboxes.mp4`
@@ -138,15 +136,12 @@ pip install -r requirements.txt
 
 2. Organize your tracking results and ground truth in the TrackEval format
 
-3. Run evaluation to compute metrics (MOTA, MOTP, IDF1, etc.)
+3. Run evaluation to compute metrics (e.g. HOTA)
 
 ### Tracker Variants
 
-The repository includes several tracker variants. You can modify which variant to use by checking the configuration in `masa/models/tracker/masa_tao_tracker.py`:
+You can modify which variant to use by checking the configuration in `masa/models/tracker/masa_tao_tracker.py`:
 
-- **masa**: Original MASA tracker
-- **masa-hung**: MASA with Hungarian algorithm optimization
-- **masa-hung-kf**: MASA with Hungarian algorithm and Kalman Filter motion estimation
 - **masa-hung-kf-OcclusionAware**: MASA with Hungarian algorithm, Kalman Filter, and occlusion-aware capabilities (default)
 
 The Kalman Filter implementation and tracking logic are located in:
