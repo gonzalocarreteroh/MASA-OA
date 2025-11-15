@@ -170,7 +170,7 @@ Examples:
                         help='Path to MASA checkpoint file')
 
     # Output configuration
-    parser.add_argument('--output-dir', dest='output_dir', default='GCH_eval',
+    parser.add_argument('--output-dir', dest='output_dir', default='evaluation',
                         help='Output directory for tracking results')
     parser.add_argument('--tracker-variant', dest='tracker_variant',
                         default='masa-hung-kf-OcclusionAware',

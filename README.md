@@ -76,7 +76,7 @@ The following sequences are currently included:
 
 Open `demo/video_demo_with_text.py` and locate the following lines (around lines 208-211 and 289):
 
-1. **Line 208** - Detection file path:
+1. **Line 226** - Detection file path:
 ```python
 detections_dict = load_detections('./benchmarks/MOT15/Venice-2/gt/gt.txt')
 ```
@@ -88,12 +88,12 @@ video_path = "./benchmarks/MOT15/Venice-2/Venice-2.mp4"
 
 3. **Line 211** - Output visualization path (optional, for GT bounding boxes visualization):
 ```python
-output_path = "./GCH_eval/MOT15/Venice-2/Venice-2_GT_bboxes.mp4"
+output_path = "./evaluation/MOT15/Venice-2/Venice-2_GT_bboxes.mp4"
 ```
 
 4. **Line 289** - Output tracking results path:
 ```python
-output_mot_txt = './GCH_eval/MOT15/Venice-2/Venice-2_masa-hung-kf-OcclusionAware.txt'
+output_mot_txt = './evaluation/MOT15/Venice-2/Venice-2_masa-hung-kf-OcclusionAware.txt'
 ```
 
 Replace `Venice-2` with the name of the sequence you want to evaluate (e.g., `KITTI-13`, `ETH-Sunnyday`, etc.).
@@ -117,12 +117,12 @@ python demo/video_demo_with_text.py \
 The script generates two main outputs:
 
 1. **Tracking results** (`.txt` file):
-   - Location: `GCH_eval/MOT15/SEQUENCE_NAME/SEQUENCE_NAME_masa-hung-kf-OcclusionAware.txt`
+   - Location: `evaluation/MOT15/SEQUENCE_NAME/SEQUENCE_NAME_masa-hung-kf-OcclusionAware.txt`
    - Format: MOTChallenge format compatible with TrackEval
    - Contains: frame, track_id, bbox coordinates, confidence score
 
 2. **Visualization video** (`.mp4` file):
-   - Location: `GCH_eval/MOT15/SEQUENCE_NAME/SEQUENCE_NAME_GT_bboxes.mp4`
+   - Location: `evaluation/MOT15/SEQUENCE_NAME/SEQUENCE_NAME_GT_bboxes.mp4`
    - Shows ground truth bounding boxes overlaid on the video
 
 ### Evaluation with TrackEval
@@ -205,7 +205,7 @@ python run_benchmark.py --benchmark benchmarks/MOT15 --continue-on-error
 - `--masa-checkpoint`: Path to MASA checkpoint (default: `saved_models/masa_models/masa_r50.pth`)
 
 **Output Configuration:**
-- `--output-dir`: Output directory for results (default: `GCH_eval`)
+- `--output-dir`: Output directory for results (default: `evaluation`)
 - `--tracker-variant`: Tracker variant name (default: `masa-hung-kf-OcclusionAware`)
 
 **Sequence Selection:**
@@ -227,7 +227,7 @@ python run_benchmark.py --benchmark benchmarks/MOT15 --continue-on-error
 The script generates outputs organized by benchmark and sequence:
 
 ```
-GCH_eval/
+evaluation/
 └── MOT15/
     ├── Venice-2/
     │   ├── Venice-2_masa-hung-kf-OcclusionAware.txt

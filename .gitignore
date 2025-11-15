@@ -131,6 +131,6 @@ venus_run.sh
 # lint.sh
 ./lint.sh
 
-# GCH videos generated and original jpg
-GCH_eval/**/*.mp4
+# evaluation videos generated and original jpg
+evaluation/**/*.mp4
 benchmarks/**/*.jpg
