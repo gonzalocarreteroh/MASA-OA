@@ -180,9 +180,19 @@ Process specific sequences only:
 python run_benchmark.py --benchmark benchmarks/MOT15 --sequences Venice-2 KITTI-13 ETH-Sunnyday
 ```
 
+Generate tracker result visualization videos:
+```bash
+python run_benchmark.py --benchmark benchmarks/MOT15 --generate-tracker-video
+```
+
 Generate ground truth visualization videos:
 ```bash
 python run_benchmark.py --benchmark benchmarks/MOT15 --generate-gt-video
+```
+
+Generate both tracker and GT visualization videos:
+```bash
+python run_benchmark.py --benchmark benchmarks/MOT15 --generate-tracker-video --generate-gt-video
 ```
 
 Use a different tracker variant:
@@ -212,6 +222,7 @@ python run_benchmark.py --benchmark benchmarks/MOT15 --continue-on-error
 - `--sequences`: Specific sequences to process (default: all)
 
 **Processing Options:**
+- `--generate-tracker-video`: Generate visualization video with tracking results
 - `--generate-gt-video`: Generate visualization video with GT bboxes
 - `--score-thr`: Bbox score threshold (default: 0.2)
 - `--device`: Device for inference (default: `cuda:0`)
@@ -230,8 +241,9 @@ The script generates outputs organized by benchmark and sequence:
 evaluation/
 └── MOT15/
     ├── Venice-2/
-    │   ├── Venice-2_masa-hung-kf-OcclusionAware.txt
-    │   └── Venice-2_GT_bboxes.mp4 (if --generate-gt-video is used)
+    │   ├── Venice-2_masa-hung-kf-OcclusionAware.txt          # Tracking results (always generated)
+    │   ├── Venice-2_masa-hung-kf-OcclusionAware.mp4          # Tracker visualization (if --generate-tracker-video)
+    │   └── Venice-2_GT_bboxes.mp4                            # GT visualization (if --generate-gt-video)
     ├── KITTI-13/
     │   └── KITTI-13_masa-hung-kf-OcclusionAware.txt
     └── ...

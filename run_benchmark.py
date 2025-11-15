@@ -82,6 +82,11 @@ def run_tracker_on_sequence(seq_name, video_path, gt_path, args):
 
     output_mot_txt = output_dir / f"{seq_name}_{args.tracker_variant}.txt"
 
+    # Optionally generate tracker result visualization video
+    output_tracker_video = None
+    if args.generate_tracker_video:
+        output_tracker_video = output_dir / f"{seq_name}_{args.tracker_variant}.mp4"
+
     # Optionally generate GT visualization video
     output_gt_video = None
     if args.generate_gt_video:
@@ -99,6 +104,9 @@ def run_tracker_on_sequence(seq_name, video_path, gt_path, args):
         "--score-thr", str(args.score_thr),
         "--device", args.device,
     ]
+
+    if output_tracker_video:
+        cmd.extend(["--out", str(output_tracker_video)])
 
     if output_gt_video:
         cmd.extend(["--output_gt_video", str(output_gt_video)])
@@ -119,6 +127,8 @@ def run_tracker_on_sequence(seq_name, video_path, gt_path, args):
     print(f"Video: {video_path}")
     print(f"Detections: {gt_path}")
     print(f"Output: {output_mot_txt}")
+    if output_tracker_video:
+        print(f"Tracker Video: {output_tracker_video}")
     if output_gt_video:
         print(f"GT Video: {output_gt_video}")
     print(f"\nCommand: {' '.join(cmd)}\n")
@@ -149,8 +159,11 @@ Examples:
   # Process specific sequences only
   python run_benchmark.py --benchmark benchmarks/MOT15 --sequences Venice-2 KITTI-13
 
-  # Generate GT visualization videos
-  python run_benchmark.py --benchmark benchmarks/MOT15 --generate-gt-video
+  # Generate tracker result visualization videos
+  python run_benchmark.py --benchmark benchmarks/MOT15 --generate-tracker-video
+
+  # Generate both tracker and GT visualization videos
+  python run_benchmark.py --benchmark benchmarks/MOT15 --generate-tracker-video --generate-gt-video
 
   # Use different tracker variant
   python run_benchmark.py --benchmark benchmarks/MOT15 --tracker-variant masa-hung-kf
@@ -181,6 +194,9 @@ Examples:
                         help='Specific sequences to process (default: all)')
 
     # Processing options
+    parser.add_argument('--generate-tracker-video', dest='generate_tracker_video',
+                        action='store_true',
+                        help='Generate visualization video with tracking results')
     parser.add_argument('--generate-gt-video', dest='generate_gt_video',
                         action='store_true',
                         help='Generate visualization video with ground truth bboxes')
