@@ -11,7 +11,7 @@ This is the official repository for the _Multiple Object Tracker with Integrated
 
 * For our evaluation, we used the MASA-R50: MASA with ResNet-50 backbone to extract object embeddings. However, in practice, other variants could also be used to perform the tracking together with our MASA-OA tracker implementation.
 
-## Structure
+## Structure
 - `demo/video_demo_with_text.py`: This is the main script in which the detection inputs are specified, runs the MASA-OA tracking, and generates the output video with tracked objects as well as the text files for performance evaluation with TrackEval.
 - `masa/models/tracker/masa_tao_tracker.py`: This file contains the implementation of the MASA-OA tracker with the integrated assignment optimization and occlusion-aware capabilities.
 - `masa/models/tracker/MASA_OA_KF/kalman_filter.py`: This file contains the Kalman Filter implementation used for motion estimation in the MASA-OA tracker.
