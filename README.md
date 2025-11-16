@@ -3,8 +3,8 @@
 
 [Applied Artificial Intelligence Group](https://www.uc3m.es/ss/Satellite/GruposInvestigacion/en/Detalle/Organismo_C/1422545966182/1371325143833/Applied_Artificial_Intelligence_Group_(GIAA)) at UC3M | [Cognitive Science Research Group](https://www.uah.es/es/investigacion/unidades-de-investigacion/grupos-de-investigacion/Grupo-de-Investigacion-en-Ciencia-Cognitiva-Cognitive-Science-Reserch-Group/) at UAH
 
-<p align="left">
-  <img src="docs/imgs/MOT15.gif" alt="Pedestrians" width="30%" />
+<p align="center">
+  <img src="docs/imgs/MOT15.gif" alt="Pedestrians" width="45%" />
 </p>
 
 
