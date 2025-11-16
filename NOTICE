@@ -1,0 +1,51 @@
+MASA-OA: Multiple Object Tracker with Integrated Embedding-Based Optimization
+and Occlusion-Aware Variants
+
+This project is a derivative work based on MASA (Matching Anything by Segmenting Anything)
+Original MASA project: https://github.com/siyuanliii/masa
+Copyright 2024 Siyuan Li
+
+MASA-OA Modifications
+Copyright 2025 Gonzalo Carretero, Juan P. Llerena, Luis Usero, Miguel A. Patricio
+Applied Artificial Intelligence Group (GIAA) at UC3M
+Cognitive Science Research Group at UAH
+
+=================================================================================
+
+MODIFICATIONS MADE TO THE ORIGINAL MASA PROJECT:
+
+The following files have been modified or added for MASA-OA:
+
+Modified Files:
+- demo/video_demo_with_text.py
+  * Added support for loading ground truth detections from MOTChallenge format files
+  * Added command-line arguments for benchmark evaluation
+  * Added MOT format output for TrackEval compatibility
+
+- masa/models/tracker/masa_tao_tracker.py
+  * Integrated Hungarian algorithm optimization for assignment
+  * Added Kalman Filter-based motion estimation
+  * Implemented occlusion-aware tracking capabilities
+
+Added Files:
+- masa/models/tracker/MASA_OA_KF/kalman_filter.py
+  * Kalman Filter implementation for motion estimation
+
+- masa/models/tracker/MASA_OA_KF/track.py
+  * Track state management with Kalman Filter integration
+
+- run_benchmark.py
+  * Automated batch processing script for benchmark evaluation
+
+- benchmarks/
+  * Directory structure and utilities for MOT benchmark evaluation
+
+- evaluation/
+  * Directory for storing tracking results and visualizations
+
+
+=================================================================================
+
+This project maintains the Apache License 2.0 from the original MASA project.
+Both the original MASA code and MASA-OA modifications are licensed under
+Apache License 2.0.
