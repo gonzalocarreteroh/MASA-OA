@@ -268,10 +268,7 @@ evaluation/
 For questions, please contact [Gonzalo Carretero](https://github.com/gonzalocarreteroh).
 
 ### Official Citation 
-Our work is still under review. We will update this section when appropriate.
-
-
-
+Please consider citing our paper if it was helpful or relevant in your research:
 
 ```bibtex
 @article{CARRETERO2026123533,
