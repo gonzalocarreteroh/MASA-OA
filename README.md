@@ -269,12 +269,20 @@ For questions, please contact [Gonzalo Carretero](https://github.com/gonzalocarr
 
 ### Official Citation 
 Our work is still under review. We will update this section when appropriate.
+
+
+
+
 ```bibtex
-@misc{masa,
-  author    = {Gonzalo Carretero, Juan P. Llerena, Luis Usero, Miguel A. Patricio},
+@article{CARRETERO2026123533,
+  author    = {Gonzalo Carretero and Juan P. Llenera and Luis Usero and Miguel A. Patricio},
   title     = {Multiple Object Tracking with Integrated Embedding-Based Optimization and Occlusion-Aware Variants},
-  journal   = {},
-  year      = {2025},
+  journal   = {Information Sciences},
+  year      = {2026},
+  volume = {749},
+  pages = {123533},
+  doi = {https://doi.org/10.1016/j.ins.2026.123533},
+  url = {https://www.sciencedirect.com/science/article/pii/S0020025526004640},
 }
 ```
 
